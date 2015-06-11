@@ -26,7 +26,7 @@ targetCompatibility = 1.8
 [compileJava]*.options*.encoding = "UTF-8"
 
 project.ext {
-  mainClassName = "com.lh.passr"
+  mainClassName = "com.lh.passr.Passr"
 }
 
 repositories {
@@ -44,6 +44,11 @@ dependencies {
   compile 'commons-io:commons-io:2.4'
   compile 'com.google.guava:guava:r05'
 
+}
+
+task runserver(type: JavaExec, dependsOn: 'classes') {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 task oneJar(type: OneJar) {

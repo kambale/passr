@@ -14,7 +14,7 @@ import java.util.Map;
 import static spark.Spark.get;
 import static spark.SparkBase.staticFileLocation;
 
-public class AttachmentController {
+public class Passr {
 
     private static Multimap<Date, Pair<String, String>> passwordLog;
     private static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
