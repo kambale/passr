@@ -1,0 +1,60 @@
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.3'
+}
+
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "http://dl.bintray.com/robfletcher/gradle-plugins" }
+  }
+  dependencies {
+    classpath "com.github.rholder:gradle-one-jar:1.0.4"
+  }
+
+}
+
+apply plugin: "idea"
+apply plugin: "java"
+apply plugin: "application"
+apply plugin: "gradle-one-jar"
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+[compileJava]*.options*.encoding = "UTF-8"
+
+project.ext {
+  mainClassName = "com.lh.passr"
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.apache.commons:commons-lang3:3.3.2'
+  compile 'com.sparkjava:spark-core:2.1'
+  compile 'junit:junit:4.12'
+  compile 'org.mockito:mockito-all:1.10.19'
+  compile 'org.mongodb:mongo-java-driver:2.12.4'
+  compile 'commons-configuration:commons-configuration:1.10'
+  compile 'org.assertj:assertj-core:2.0.0'
+  compile 'commons-io:commons-io:2.4'
+  compile 'com.google.guava:guava:r05'
+
+}
+
+task oneJar(type: OneJar) {
+  mainClass = mainClassName
+}
+
+task testUnit(type: Test, dependsOn: testClasses) {
+//  environment "CONFIG_FILEPATH", "src/main/resources/passr.properties"
+  include 'com/lh/**'
+}
+
+artifacts {
+  oneJar
+}
